@@ -7,7 +7,7 @@ public class Map
     final int y_extent = 649;
     int field[][] = new int[649][689];
     int circle_radius = 187;
-    int ax, ay, bx, by, cx, cy, dy, e, f, gx, gy, h, i, j, px, py;
+    int ax, ay, bx, by, cx, cy, dy, ex, ey, gx, gy, jx, jy, lx, ly, px, py;
 
 
     public int getX_extent()
@@ -56,6 +56,17 @@ public class Map
         cx=74;
         cy=360;
         dy=400;
+        ex=386;
+        ey=556;
+        lx=201;
+        ly=32;
+        jx=294;
+        jy=77;
+
+
+
+
+
 
         for (int i = 0; i < x_extent; i++)
             for (int j=0; j< y_extent; j++)
@@ -87,9 +98,25 @@ public class Map
             for (int j=cy; j<= dy; j++)
                 field[j][i] = 1;
 
-        for (int i = dx; i <= fx; i++)
-            for (int j=dy; j<= dy; j++)
+        for (int i = ex; i <= gx; i++)
+            for (int j=dy; j<= ey; j++)
                 field[j][i] = 1;
+
+        for (int i = ex; i >= cx; i--) {
+            for (int j = dy; j <= ey; j++)
+                field[j][i] = 1;
+            if(i % 2 == 0)
+                ey--;
+        }
+
+        for (int i = lx; i <= jx; i++)
+            for (int j = ly; j<= ay; j++)
+                field[j][i] = 1;
+
+        for (int i = jx; i <= gx; i++)
+            for (int j = jy; j <= ay; j++)
+                field[j][i] = 1;
+
 
 
        /* for (int i = 0; i < y_extent; i++) {
