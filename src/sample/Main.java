@@ -16,11 +16,14 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception
+    {
 
         //View view = new View(primaryStage);
         //view.initialize();
-        Map map = new Map();
+        Country country = new Country();
+        Map map = new Map(country.getCities());
+        Specimen pacjent_zero = new Specimen(1, country.getCities(), map);
 
 
 
@@ -28,10 +31,8 @@ public class Main extends Application {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         launch(args);
     }
 }
-
-
-

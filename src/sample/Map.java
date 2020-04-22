@@ -2,12 +2,13 @@ package sample;
 
 public class Map
 {
-    Country country;
+    //Country country;
     final int x_extent = 689;
     final int y_extent = 649;
     int field[][] = new int[649][689];
-    int circle_radius = 187;
-    int ax, ay, bx, by, cx, cy, dy, ex, ey, gx, gy, jx, jy, lx, ly, px, py;
+    final int circle_radius = 187;
+    int size;
+    City cities[];
 
 
     public int getX_extent()
@@ -30,54 +31,45 @@ public class Map
         this.field = field;
     }
 
-    public Country getCountry()
+    public int getSize()
     {
-        return country;
+        return size;
     }
 
-    public void setCountry(Country country)
+    public void setSize(int size)
     {
-        this.country = country;
+        this.size = size;
     }
 
-    public Map(/*Country country*/)
+    public City[] getCities()
     {
-        //this.country = country;
+        return cities;
+    }
 
+    public void setCities(City[] cities)
+    {
+        this.cities = cities;
+    }
 
-        ay=96;
-        ax=53;
-        by=360;
-        bx=53;
-        gy=96;
-        gx=613;
-        py=360;
-        px=613;
-        cx=74;
-        cy=360;
-        dy=400;
-        ex=386;
-        ey=556;
-        lx=201;
-        ly=32;
-        jx=294;
-        jy=77;
-
-
-
-
-
+    /**
+     * Funkcja zapełnia tablicę field domyślnymi wartościami (szpitale w każdym mieście)
+     * @param cities
+     */
+    public Map(City[] cities) // Map(country.getCities())
+    {
+        this.size = cities.length;
+        this.cities = cities;
 
         for (int i = 0; i < x_extent; i++)
             for (int j=0; j< y_extent; j++)
                 field[j][i] = 0;
 
         /* inkrementuje kółka */
-        /*for(int i=0; i<country.cities.length; i++)
+        for(int i=0; i<size; i++)
         {
-            for (int j = country.cities[i].x_coor - circle_radius; j <= circle_radius + country.cities[i].x_coor; j++)
+            for (int j = cities[i].x_coor - circle_radius; j <= circle_radius + cities[i].x_coor; j++)
             {
-                for (int k = country.cities[i].y_coor - circle_radius; k<= circle_radius + country.cities[i].y_coor; k++)
+                for (int k = cities[i].y_coor - circle_radius; k<= circle_radius + cities[i].y_coor; k++)
                 {
                     double distance_to_centre = Math.sqrt((j - circle_radius) * (j - circle_radius) + (k - circle_radius) * (k - circle_radius));
                     if (distance_to_centre < circle_radius + 0.5)
@@ -88,45 +80,27 @@ public class Map
 
                 }
             }
-        }*/
-
-        for (int i = ax; i <= gx; i++)
-            for (int j=ay; j<= by; j++)
-                field[j][i] = 1;
-
-        for (int i = cx; i <= gx; i++)
-            for (int j=cy; j<= dy; j++)
-                field[j][i] = 1;
-
-        for (int i = ex; i <= gx; i++)
-            for (int j=dy; j<= ey; j++)
-                field[j][i] = 1;
-
-        for (int i = ex; i >= cx; i--) {
-            for (int j = dy; j <= ey; j++)
-                field[j][i] = 1;
-            if(i % 2 == 0)
-                ey--;
         }
+    }
 
-        for (int i = lx; i <= jx; i++)
-            for (int j = ly; j<= ay; j++)
-                field[j][i] = 1;
-
-        for (int i = jx; i <= gx; i++)
-            for (int j = jy; j <= ay; j++)
-                field[j][i] = 1;
-
-
-
-       /* for (int i = 0; i < y_extent; i++) {
-            for (int j = 0; j < x_extent; j++)
-                System.out.print(field[i][j]);
-
-            System.out.println("\n");
-        }*/
-
-
+    /**
+     * Funkcja dekrementuje pola tablicy field będące w zasięgu usuwanego szpitala
+     * @param number oznacza nr usuwanego miasta, w którym usuwany jest szpital
+     */
+    public void erase_city(int number)
+    {
+        for (int i = cities[number].x_coor - circle_radius; i <= circle_radius + cities[number].x_coor; i++)
+        {
+            for (int j = cities[number].y_coor - circle_radius; j<= circle_radius + cities[number].y_coor; j++)
+            {
+                double distance_to_centre = Math.sqrt((i - circle_radius) * (i - circle_radius) + (j - circle_radius) * (j - circle_radius));
+                if (distance_to_centre < circle_radius + 0.5)
+                {
+                    if (j<649 && j>0 && i<689 && i>0 && field[j][i] != -1)
+                        field[j][i]--;
+                }
+            }
+        }
     }
 
 }

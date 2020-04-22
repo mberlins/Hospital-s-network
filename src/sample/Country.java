@@ -1,6 +1,9 @@
-
 package sample;
 
+/**
+ * Obiekt klasy typu country przechowuje tworzy oraz przechpowuje domyślną listę miast, w których możę
+ * znajdować się szpital
+ */
 public class Country
 {
     City cities[] = new City [74];
@@ -98,6 +101,5 @@ public class Country
         cities[71] = new City(72, "Tarnowskie Góry", 328, 494);
         cities[72] = new City(73, "Mielec", 504, 513 );
         cities[73] = new City(74, "Tczew", 317, 71 );
-
     }
 }
