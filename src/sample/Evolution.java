@@ -55,7 +55,7 @@ public class Evolution
         specimen_ter = new Specimen(0, map);
     }
 
-    public void evolution_control()
+    public Specimen evolution_control()
     {
         int check_ter=1000;
         int check_bis=1000;
@@ -72,7 +72,7 @@ public class Evolution
         else
             replace_specimen(specimen_ter, 2);
 
-        while(counter_bis < 500 && counter_ter < 500)
+        while(counter_bis < 10 && counter_ter < 10)
         {
             check_ter = specimen_ter.adaptation();
             check_bis = specimen_bis.adaptation();
@@ -93,6 +93,12 @@ public class Evolution
                 counter_ter++;
             }
         }
+
+        if(counter_bis == 10)
+            return specimen_bis;
+        else
+            return specimen_ter;
+
     }
 
     public void replace_specimen(Specimen specimen, int id)
@@ -103,8 +109,9 @@ public class Evolution
             eliminated = (int) (Math.random() * 1234);
             eliminated = eliminated % 74;
 
-            if (specimen_bis.hospitals[eliminated]==1)
+            if (specimen.hospitals[eliminated]==1) {
                 check = 1;
+            }
         }
         map.erase_city(eliminated);
 

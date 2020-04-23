@@ -18,15 +18,41 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception
     {
-
-        //View view = new View(primaryStage);
-        //view.initialize();
+        int hospitals[];
+        Specimen specimen;
         Country country = new Country();
         Map map = new Map(country.getCities(), country.getBorderPoints(), country.getBorders());
         //Specimen pacjent_zero = new Specimen(1, country.getCities(), map);
-        Specimen patient_zero = new Specimen(1, map);
-        int a = patient_zero.adaptation();
+        //Specimen patient_zero = new Specimen(1, map);
+        //int a = patient_zero.adaptation();
         //System.out.print(a);
+
+        Evolution evolution = new Evolution();
+
+        specimen = evolution.evolution_control();
+
+        hospitals = specimen.getHospitals();
+
+        int field[][] = specimen.field;
+
+        View view = new View(primaryStage);
+        view.initialize();
+
+        for(int i = 0; i < 74; i++)
+        {
+            if(hospitals[i] == 1)
+            view.addCircle(country.cities[i].x_coor, country.cities[i].y_coor, 187);
+        }
+
+        for (int i = 0; i < 649; i++) {
+            for (int j = 0; j < 689; j++)
+                System.out.print(field[i][j]);
+
+            System.out.println("\n");
+        }
+
+        for (int i = 0; i < 74; i++)
+            System.out.print(hospitals[i]);
 
 
     }

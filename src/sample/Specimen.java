@@ -71,7 +71,12 @@ public class Specimen
         this.generation = generation+1;
         this.size = size-1;
 
-        System.arraycopy(map.getField(), 0, this.field, 0, 447161);
+        //System.arraycopy(map.getField(), 0, this.field, 0, 447161);
+
+
+        for (int i = 0; i < 689; i++)
+            for (int j=0; j< 649; j++)
+                this.field[j][i] = map.getField()[j][i];
 
         hospitals = new int[74];
         System.arraycopy(predecessors_hospitals, 0, this.hospitals,0, 74);
@@ -86,7 +91,7 @@ public class Specimen
 
         hospitals = new int [74];
         for(int i = 0; i < 74; i++)
-            hospitals[i] = i+1;
+            hospitals[i] = 1;
     }
 
 
