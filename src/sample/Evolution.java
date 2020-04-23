@@ -66,6 +66,8 @@ public class Evolution
         eliminated = eliminated%74;
         map.erase_city(eliminated);
 
+        specimen_bis = new Specimen(patient_zero.getGeneration(), map, patient_zero.getHospitals(), eliminated, patient_zero.getSize());
+
         while (advancement!=0)
         {
 
@@ -73,6 +75,9 @@ public class Evolution
             eliminated = eliminated%74;
 
             map.erase_city(eliminated);
+            
+
+
 
         }
     }
