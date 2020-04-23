@@ -56,5 +56,13 @@ public class City
         this.x_coor = x_coor;
         this.y_coor = y_coor;
     }
+
+    public City(int x_coor, int y_coor)
+    {
+        id = -1;
+        name = "-";
+        this.x_coor = x_coor;
+        this.y_coor = y_coor;
+    }
 }
 

@@ -7,6 +7,7 @@ package sample;
 public class Country
 {
     City cities[] = new City [74];
+    City borders[] = new City [74];
 
     public City[] getCities()
     {
@@ -101,5 +102,89 @@ public class Country
         cities[71] = new City(72, "Tarnowskie Góry", 328, 494);
         cities[72] = new City(73, "Mielec", 504, 513 );
         cities[73] = new City(74, "Tczew", 317, 71 );
+
+
+        borders[0] = new City(382, 40);
+        borders[1] = new City(506, 56);
+        borders[2] = new City(605, 47);
+        borders[3] = new City(646, 75);
+        borders[4] = new City(652, 125);
+        borders[5] = new City(664, 167);
+        borders[6] = new City(676, 189);
+        borders[7] = new City(677, 238);
+        borders[8] = new City(642, 257);
+        borders[9] = new City(624, 288);
+
+        borders[10] = new City(657, 312);
+        borders[11] = new City(681, 333);
+        borders[12] = new City(658, 385);
+        borders[13] = new City(669, 417);
+        borders[14] = new City(688, 447); // najdalej na E - 689 czy 688?
+        borders[15] = new City(687, 471);
+        borders[16] = new City(681, 499);
+        borders[17] = new City(653, 515);
+        borders[18] = new City(635, 533);
+        borders[19] = new City(608, 569);
+
+        borders[20] = new City(588, 596);
+        borders[21] = new City(604, 648); // najdalej na S
+        borders[22] = new City(560, 642);
+        borders[23] = new City(548, 634);
+        borders[24] = new City(529, 618);
+        borders[25] = new City(505, 612);
+        borders[26] = new City(489, 613);
+        borders[27] = new City(471, 626);
+        borders[28] = new City(457, 613);
+        borders[29] = new City(428, 620);
+
+        borders[30] = new City(411, 638);
+        borders[31] = new City(390, 636);
+        borders[32] = new City(387, 615);
+        borders[33] = new City(370, 591);
+        borders[34] = new City(336, 615);
+        borders[35] = new City(327, 601);
+        borders[36] = new City(312, 578);
+        borders[37] = new City(291, 555);
+        borders[38] = new City(261, 549);
+        borders[39] = new City(242, 528);
+
+        borders[40] = new City(225, 512);
+        borders[41] = new City(190, 498);
+        borders[42] = new City(200, 516);
+        borders[43] = new City(179, 534);
+        borders[44] = new City(148, 497);
+        borders[45] = new City(160, 475);
+        borders[46] = new City(132, 476);
+        borders[47] = new City(99, 455);
+        borders[48] = new City(80, 434);
+        borders[49] = new City(56, 444);
+
+        borders[50] = new City(65, 414);
+        borders[51] = new City(61, 379);
+        borders[52] = new City(46, 370);
+        borders[53] = new City(38, 338);
+        borders[54] = new City(44, 296);
+        borders[55] = new City(32, 275);
+        borders[56] = new City(33, 246);
+        borders[57] = new City(0, 224); // najdalej na W
+        borders[58] = new City(20, 195);
+        borders[59] = new City(21, 164);
+
+        borders[60] = new City(14, 127);
+        borders[61] = new City(10, 104);
+        borders[62] = new City(54, 89);
+        borders[63] = new City(90, 75);
+        borders[64] = new City(121, 66);
+        borders[65] = new City(152, 53);
+        borders[66] = new City(172, 31);
+        borders[67] = new City(206, 16);
+        borders[68] = new City(228, 8);
+        borders[69] = new City(291, 0); // najdalej na N
+
+        borders[70] = new City(297, 2);
+        borders[71] = new City(324, 21);
+        borders[72] = new City(307, 43);
+        borders[73] = new City(342, 53);
+
     }
 }
