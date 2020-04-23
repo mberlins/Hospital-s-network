@@ -14,7 +14,6 @@ public class Evolution
 
     int advancement = 1;
 
-    int check = 0;
 
     public Country getCountry()
     {
@@ -62,23 +61,30 @@ public class Evolution
         map = new Map(country.cities, country.borderPoints, country.borders);
 
         patient_zero = new Specimen(0, map);
+    }
+
+    public void evolution_control()
+    {
         int eliminated = (int)(Math.random()*1234);
         eliminated = eliminated%74;
         map.erase_city(eliminated);
 
         specimen_bis = new Specimen(patient_zero.getGeneration(), map, patient_zero.getHospitals(), eliminated, patient_zero.getSize());
-
-        while (advancement!=0)
-        {
-
-            eliminated = (int)(Math.random()*1234);
-            eliminated = eliminated%74;
-
-            map.erase_city(eliminated);
-            
-
-
-
-        }
     }
+
+    public void replace_specimen(Specimen specimen)
+    {
+        int check = 0;
+        int eliminated = 0;
+        while (check == 0)
+        {
+            eliminated = (int) (Math.random() * 1234);
+            eliminated = eliminated % 74;
+
+            if (specimen_bis.hospitals[eliminated]==1)
+                check = 1;
+        }
+        map.erase_city(eliminated);
+    }
+
 }
