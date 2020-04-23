@@ -23,9 +23,10 @@ public class Main extends Application {
         //view.initialize();
         Country country = new Country();
         Map map = new Map(country.getCities(), country.getBorderPoints(), country.getBorders());
-        Specimen pacjent_zero = new Specimen(1, country.getCities(), map);
-
-
+        //Specimen pacjent_zero = new Specimen(1, country.getCities(), map);
+        Specimen patient_zero = new Specimen(1, map);
+        int a = patient_zero.adaptation();
+        //System.out.print(a);
 
 
     }

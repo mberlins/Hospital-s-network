@@ -10,22 +10,13 @@ public class Country
     City borders[] = new City [74];
     City borderPoints[] = new City [9];
 
-    public void setBorders(City[] borders) {
-        this.borders = borders;
-    }
+    public void setBorders(City[] borders) { this.borders = borders; }
 
-    public void setBorderPoints(City[] borderPoints) {
-        this.borderPoints = borderPoints;
-    }
+    public void setBorderPoints(City[] borderPoints) { this.borderPoints = borderPoints; }
 
-    public City[] getBorders() {
-        return borders;
-    }
+    public City[] getBorders() { return borders; }
 
-    public City[] getBorderPoints() {
-        return borderPoints;
-    }
-
+    public City[] getBorderPoints() { return borderPoints; }
 
     public City[] getCities()
     {
