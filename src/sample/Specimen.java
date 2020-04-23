@@ -45,10 +45,10 @@ public class Specimen
      * @param map przechowuje informacje o pokryciu powierzchni kraju przez siatkę szpitali, powinien być przekazywany
      *            przez osobnika poprzedniej generacji
      */
-    public Specimen(int generation, Map map, int[] hospitals, int number) // (poprzednik.getGeneration(), poprzednik.getCities(), poprzednik.getMap(), number dostaje od algorytmu)
+    public Specimen(int generation, Map map, int[] hospitals, int number, int size) // (poprzednik.getGeneration(), poprzednik.getCities(), poprzednik.getMap(), number dostaje od algorytmu)
     {
         this.generation = generation;
-        this.size = map.getCities().length;
+        this.size = size-1;
         this.map = map;
         this.hospitals = hospitals;
         hospitals[number]=0;
@@ -58,7 +58,7 @@ public class Specimen
     public Specimen(int generation, Map map) // konstruktor pierwszego osobnika
     {
         this.generation = generation;
-        this.size = map.cities.length;
+        this.size = map.getSize();
         this.map = map;
 
         hospitals = new int [75];
