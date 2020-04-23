@@ -6,15 +6,15 @@ public class Evolution
 
     private Map map;
 
-    private Specimen patient_zero;
-
     private Specimen specimen_bis;
 
     private Specimen specimen_ter;
 
-    private int exit_condition = 1;
-
     private int eliminated = 0;
+
+    private int counter_bis = 0;
+
+    private int counter_ter = 0;
 
 
     public Country getCountry()
@@ -37,16 +37,6 @@ public class Evolution
         this.map = map;
     }
 
-    public Specimen getPatient_zero()
-    {
-        return patient_zero;
-    }
-
-    public void setPatient_zero(Specimen patient_zero)
-    {
-        this.patient_zero = patient_zero;
-    }
-
     public Specimen getSpecimen_bis()
     {
         return specimen_bis;
@@ -62,39 +52,45 @@ public class Evolution
         country = new Country();
         map = new Map(country.cities, country.borderPoints, country.borders);
 
-        patient_zero = new Specimen(0, map);
+        specimen_ter = new Specimen(0, map);
     }
 
     public void evolution_control()
     {
-        int check_ter=100;
-        int check_bis=100;
+        int check_ter=1000;
+        int check_bis=1000;
         eliminated = (int)(Math.random()*1234);
         eliminated = eliminated%74;
         map.erase_city(eliminated);
 
-        specimen_bis = new Specimen(patient_zero.getGeneration(), map, patient_zero.getHospitals(), eliminated, patient_zero.getSize());
+        specimen_bis = new Specimen(specimen_ter.getGeneration(), map, specimen_ter.getHospitals(), eliminated, specimen_ter.getSize());
 
         check_bis = specimen_bis.adaptation();
 
         if(check_bis!=1000)
             replace_specimen(specimen_bis, 1);
         else
-            replace_specimen(patient_zero, 2);
+            replace_specimen(specimen_ter, 2);
 
-        while(exit_condition != 0)
+        while(counter_bis < 500 && counter_ter < 500)
         {
             check_ter = specimen_ter.adaptation();
             check_bis = specimen_bis.adaptation();
 
+            if (counter_ter > 1 || counter_bis > 1)
+                map.add_city(eliminated);
 
             if (check_bis<check_ter)
             {
                 replace_specimen(specimen_bis, 1);
+                counter_bis++;
+                counter_ter = 0;
             }
             else
             {
                 replace_specimen(specimen_ter, 2);
+                counter_bis = 0;
+                counter_ter++;
             }
         }
     }
@@ -102,7 +98,6 @@ public class Evolution
     public void replace_specimen(Specimen specimen, int id)
     {
         int check = 0;
-        eliminated = 0;
         while (check == 0)
         {
             eliminated = (int) (Math.random() * 1234);
@@ -117,7 +112,6 @@ public class Evolution
             specimen_ter = new Specimen(specimen.getGeneration(), map, specimen.getHospitals(), eliminated, specimen.getSize());
         else if ( id ==2)
             specimen_bis = new Specimen(specimen.getGeneration(), map, specimen.getHospitals(), eliminated, specimen.getSize());
-
 
     }
 
