@@ -10,6 +10,8 @@ public class Evolution
 
     private Specimen specimen_bis;
 
+    private Specimen specimen_ter;
+
     int advancement = 1;
 
     int check = 0;
@@ -60,15 +62,18 @@ public class Evolution
         map = new Map(country.cities, country.borderPoints, country.borders);
 
         patient_zero = new Specimen(0, map);
+        int eliminated = (int)(Math.random()*1234);
+        eliminated = eliminated%74;
+        map.erase_city(eliminated);
 
         while (advancement!=0)
         {
 
-            int eliminated = (int)(Math.random()*1234);
+            eliminated = (int)(Math.random()*1234);
             eliminated = eliminated%74;
 
             map.erase_city(eliminated);
-            
+
         }
     }
 }
