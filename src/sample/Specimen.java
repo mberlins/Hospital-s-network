@@ -5,7 +5,9 @@ public class Specimen
     int generation;
     int size;
     int hospitals[];
-    Map map;
+    final int x_extent = 689;
+    final int y_extent = 649;
+    int field[][] = new int[649][689];
 
     public int[] getHospitals() { return hospitals; }
 
@@ -29,15 +31,7 @@ public class Specimen
         this.size = size;
     }
 
-    public Map getMap()
-    {
-        return map;
-    }
 
-    public void setMap(Map map)
-    {
-        this.map = map;
-    }
 
     /**
      * Konstruktor klasy Specimen
@@ -49,17 +43,18 @@ public class Specimen
     {
         this.generation = generation;
         this.size = size-1;
-        this.map = map;
         this.hospitals = hospitals;
+
+        System.arraycopy(map.getField(), 0, this.field, 0, 447161);
         hospitals[number]=0;
-        map.erase_city(number);
+
     }
 
     public Specimen(int generation, Map map) // konstruktor pierwszego osobnika
     {
         this.generation = generation;
         this.size = map.getSize();
-        this.map = map;
+
 
         hospitals = new int [75];
         for(int i = 1; i <= 74; i++)
@@ -67,24 +62,14 @@ public class Specimen
 
     }
 
-    /**
-     * Wywołuje metodę erase_city klasy Map
-     * @param number przekazuje numer id miasta, w którym usuwamy szpital
-     */
-    public void add_city(int number)
-    {
-        size++;
-        map.add_city(number-1);
-        hospitals[number] = 1;
-    }
 
     public int adaptation()
     {
 
-        for (int i = 0; i < map.x_extent; i++)
-            for (int j=0; j< map.y_extent; j++)
+        for (int i = 0; i < x_extent; i++)
+            for (int j=0; j< y_extent; j++)
             {
-                if(map.field[j][i] == 0)
+                if(field[j][i] == 0)
                     return 0;
             }
 
