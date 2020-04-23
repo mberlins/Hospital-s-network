@@ -4,7 +4,6 @@ public class Specimen
 {
     int generation;
     int size;
-    City cities[];
     int hospitals[];
     Map map;
 
@@ -30,19 +29,6 @@ public class Specimen
         this.size = size;
     }
 
-    /**
-     * @return zwraca tablicę miast, w których znajdują się szpitale
-     */
-    public City[] getCities()
-    {
-        return cities;
-    }
-
-    public void setCities(City[] cities)
-    {
-        this.cities = cities;
-    }
-
     public Map getMap()
     {
         return map;
@@ -56,24 +42,23 @@ public class Specimen
     /**
      * Konstruktor klasy Specimen
      * @param generation oznacza generację osobnika
-     * @param cities jest listą miast, w których dany osobnik posiada szpitale
      * @param map przechowuje informacje o pokryciu powierzchni kraju przez siatkę szpitali, powinien być przekazywany
      *            przez osobnika poprzedniej generacji
      */
-    public Specimen(int generation, City[] cities, Map map, int[] hospitals) // (poprzednik.getGeneration(), poprzednik.getCities(), poprzednik.getMap(), poprzednik.getHospitals())
+    public Specimen(int generation, Map map, int[] hospitals, int number) // (poprzednik.getGeneration(), poprzednik.getCities(), poprzednik.getMap(), number dostaje od algorytmu)
     {
         this.generation = generation;
-        this.size = cities.length;
-        this.cities = cities;
+        this.size = map.getCities().length;
         this.map = map;
         this.hospitals = hospitals;
+        hospitals[number]=0;
+        map.erase_city(number);
     }
 
     public Specimen(int generation, Map map) // konstruktor pierwszego osobnika
     {
         this.generation = generation;
         this.size = map.cities.length;
-        this.cities = map.cities;
         this.map = map;
 
         hospitals = new int [75];
@@ -86,11 +71,11 @@ public class Specimen
      * Wywołuje metodę erase_city klasy Map
      * @param number przekazuje numer id miasta, w którym usuwamy szpital
      */
-    public void delete_city(int number)
+    public void add_city(int number)
     {
-        size--;
-        map.erase_city(number-1);
-        hospitals[number] = 0;
+        size++;
+        map.add_city(number-1);
+        hospitals[number] = 1;
     }
 
     public int adaptation()
