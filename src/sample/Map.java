@@ -87,7 +87,8 @@ public class Map
             for (int j=borderPoints[5].y_coor; j<= borderPoints[6].y_coor; j++)
                 field[j][i] = 0;
 
-        for (int i = borderPoints[6].x_coor; i >= borderPoints[4].x_coor; i--) {
+        for (int i = borderPoints[6].x_coor; i >= borderPoints[4].x_coor; i--)
+        {
             for (int j = borderPoints[5].y_coor; j <= temp; j++)
                 field[j][i] = 0;
             if(i % 2 == 0)
@@ -104,7 +105,7 @@ public class Map
 
         /* wypełnia tabelę fields punktami oznaczającymi dokładne granice Polski */
         for (int i = 0; i < sizeBorders; i++)
-                field[borders[i].y_coor][borders[i].x_coor] = 0;
+            field[borders[i].y_coor][borders[i].x_coor] = 0;
 
 
         /* inkrementuje kółka */
@@ -117,10 +118,9 @@ public class Map
                     double distance_to_centre = Math.sqrt((j - cities[i].x_coor) * (j - cities[i].x_coor) + (k - cities[i].y_coor) * (k - cities[i].y_coor));
                     if (distance_to_centre < circle_radius + 0.5)
                     {
-                       if (k<649 && k>0 && j<689 && j>0 && field[k][j] != -1)
+                        if (k<649 && k>0 && j<689 && j>0 && field[k][j] != -1)
                             field[k][j]++;
                     }
-
                 }
             }
         }
@@ -137,7 +137,7 @@ public class Map
         {
             for (int j = cities[number].y_coor - circle_radius; j<= circle_radius + cities[number].y_coor; j++)
             {
-                double distance_to_centre = Math.sqrt((i - circle_radius) * (i - circle_radius) + (j - circle_radius) * (j - circle_radius));
+                double distance_to_centre = Math.sqrt((i - cities[number].x_coor) * (i - cities[number].x_coor) + (j - cities[number].y_coor) * (j - cities[number].y_coor));
                 if (distance_to_centre < circle_radius + 0.5)
                 {
                     if (j<649 && j>0 && i<689 && i>0 && field[j][i] != -1)
@@ -145,6 +145,7 @@ public class Map
                 }
             }
         }
+
     }
 
     public void add_city(int number)
@@ -153,7 +154,7 @@ public class Map
         {
             for (int j = cities[number].y_coor - circle_radius; j<= circle_radius + cities[number].y_coor; j++)
             {
-                double distance_to_centre = Math.sqrt((i - circle_radius) * (i - circle_radius) + (j - circle_radius) * (j - circle_radius));
+                double distance_to_centre = Math.sqrt((i - cities[number].x_coor) * (i - cities[number].x_coor) + (j - cities[number].y_coor) * (j - cities[number].y_coor));
                 if (distance_to_centre < circle_radius + 0.5)
                 {
                     if (j<649 && j>0 && i<689 && i>0 && field[j][i] != -1)

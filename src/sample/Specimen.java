@@ -68,7 +68,7 @@ public class Specimen
      */
     public Specimen(int generation, Map map, int[] predecessors_hospitals, int number, int size) // (poprzednik.getGeneration(), poprzednik.getCities(), poprzednik.getMap(), number dostaje od algorytmu)
     {
-        this.generation = generation;
+        this.generation = generation+1;
         this.size = size-1;
 
         System.arraycopy(map.getField(), 0, this.field, 0, 447161);
@@ -97,7 +97,7 @@ public class Specimen
             for (int j=0; j< y_extent; j++)
             {
                 if(field[j][i] == 0)
-                    return 0;
+                    return 1000;
             }
 
         return size;
