@@ -8,7 +8,11 @@ public class Map
     int field[][] = new int[649][689];
     final int circle_radius = 187;
     int size;
+    int sizeBorders;
+    int temp;
     City cities[];
+    City borderPoints[];
+    City borders[];
 
 
     public int getX_extent()
@@ -55,14 +59,53 @@ public class Map
      * Funkcja zapełnia tablicę field domyślnymi wartościami (szpitale w każdym mieście)
      * @param cities
      */
-    public Map(City[] cities) // Map(country.getCities())
+    public Map(City[] cities, City[] borderPoints, City[] borders) // Map(country.getCities())
     {
         this.size = cities.length;
         this.cities = cities;
+        this.sizeBorders = borderPoints.length;
+        this.borderPoints = borderPoints;
+        this.borders = borders;
+
+        temp = borderPoints[6].y_coor;
+
 
         for (int i = 0; i < x_extent; i++)
             for (int j=0; j< y_extent; j++)
+                field[j][i] = -1;
+
+        /* 6 pętli - rysują uproszczoną mapę Polski w tabeli fields */
+        for (int i = borderPoints[0].x_coor; i <= borderPoints[2].x_coor; i++)
+            for (int j=borderPoints[0].y_coor; j<= borderPoints[1].y_coor; j++)
                 field[j][i] = 0;
+
+        for (int i = borderPoints[4].x_coor; i <= borderPoints[2].x_coor; i++)
+            for (int j=borderPoints[4].y_coor; j<= borderPoints[5].y_coor; j++)
+                field[j][i] = 0;
+
+        for (int i = borderPoints[6].x_coor; i <= borderPoints[2].x_coor; i++)
+            for (int j=borderPoints[5].y_coor; j<= borderPoints[6].y_coor; j++)
+                field[j][i] = 0;
+
+        for (int i = borderPoints[6].x_coor; i >= borderPoints[4].x_coor; i--) {
+            for (int j = borderPoints[5].y_coor; j <= borderPoints[6].y_coor; j++)
+                field[j][i] = 0;
+            if(i % 2 == 0)
+                temp--;
+        }
+
+        for (int i = borderPoints[7].x_coor; i <= borderPoints[8].x_coor; i++)
+            for (int j = borderPoints[7].y_coor; j<= borderPoints[0].y_coor; j++)
+                field[j][i] = 0;
+
+        for (int i = borderPoints[8].x_coor; i <= borderPoints[2].x_coor; i++)
+            for (int j = borderPoints[8].x_coor; j <= borderPoints[0].y_coor; j++)
+                field[j][i] = 0;
+
+        /* wypełnia tabelę fields punktami oznaczającymi dokładne granice Polski */
+        for (int i = 0; i < sizeBorders; i++)
+                field[borders[i].y_coor][borders[i].x_coor] = 0;
+
 
         /* inkrementuje kółka */
         for(int i=0; i<size; i++)

@@ -22,7 +22,7 @@ public class Main extends Application {
         //View view = new View(primaryStage);
         //view.initialize();
         Country country = new Country();
-        Map map = new Map(country.getCities());
+        Map map = new Map(country.getCities(), country.getBorderPoints(), country.getBorders());
         Specimen pacjent_zero = new Specimen(1, country.getCities(), map);
 
 

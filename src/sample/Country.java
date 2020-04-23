@@ -8,6 +8,24 @@ public class Country
 {
     City cities[] = new City [74];
     City borders[] = new City [74];
+    City borderPoints[] = new City [9];
+
+    public void setBorders(City[] borders) {
+        this.borders = borders;
+    }
+
+    public void setBorderPoints(City[] borderPoints) {
+        this.borderPoints = borderPoints;
+    }
+
+    public City[] getBorders() {
+        return borders;
+    }
+
+    public City[] getBorderPoints() {
+        return borderPoints;
+    }
+
 
     public City[] getCities()
     {
@@ -185,6 +203,17 @@ public class Country
         borders[71] = new City(324, 21);
         borders[72] = new City(307, 43);
         borders[73] = new City(342, 53);
+
+        borderPoints[0] = new City(53, 96);
+        borderPoints[1] = new City(53, 360);
+        borderPoints[2] = new City(613, 96);
+        borderPoints[3] = new City(613, 360);
+        borderPoints[4] = new City(74, 360);
+        borderPoints[5] = new City(74, 400);
+        borderPoints[6] = new City(386, 556);
+        borderPoints[7] = new City(201, 32);
+        borderPoints[8] = new City(294, 77);
+
 
     }
 }
