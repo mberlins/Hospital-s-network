@@ -1,7 +1,6 @@
 package sample;
 
-public class Evolution
-{
+public class Evolution {
     private Country country;
 
     private Map map;
@@ -16,113 +15,190 @@ public class Evolution
 
     private int counter_ter = 0;
 
+    int replaced;
+    int replaced_bis;
+    int added;
+    int temp;
 
-    public Country getCountry()
-    {
+
+    public Country getCountry() {
         return country;
     }
 
-    public void setCountry(Country country)
-    {
+    public void setCountry(Country country) {
         this.country = country;
     }
 
-    public Map getMap()
-    {
+    public Map getMap() {
         return map;
     }
 
-    public void setMap(Map map)
-    {
+    public void setMap(Map map) {
         this.map = map;
     }
 
-    public Specimen getSpecimen_bis()
-    {
+    public Specimen getSpecimen_bis() {
         return specimen_bis;
     }
 
-    public void setSpecimen_bis(Specimen specimen_bis)
-    {
+    public void setSpecimen_bis(Specimen specimen_bis) {
         this.specimen_bis = specimen_bis;
     }
 
-    public Evolution()
-    {
+    public Evolution() {
         country = new Country();
         map = new Map(country.cities, country.borderPoints, country.borders);
 
         specimen_ter = new Specimen(0, map);
     }
 
-    public Specimen evolution_control()
-    {
-        int check_ter=1000;
-        int check_bis=1000;
-        eliminated = (int)(Math.random()*1234);
-        eliminated = eliminated%74;
+    public Specimen evolution_control() {
+        int counter = 20;
+        int check_ter = 1000;
+        int check_bis = 1000;
+        eliminated = (int) (Math.random() * 1234);
+        eliminated = eliminated % 74;
         map.erase_city(eliminated);
 
         specimen_bis = new Specimen(specimen_ter.getGeneration(), map, specimen_ter.getHospitals(), eliminated, specimen_ter.getSize());
 
         check_bis = specimen_bis.adaptation();
 
-        if(check_bis!=1000)
+        if (check_bis != 1000)
             replace_specimen(specimen_bis, 1);
         else
             replace_specimen(specimen_ter, 2);
 
-        while(counter_bis < 10 && counter_ter < 10)
-        {
+        while (counter_bis < 25 && counter_ter < 25) {
             check_ter = specimen_ter.adaptation();
             check_bis = specimen_bis.adaptation();
+
+            int modulo = (int) (Math.random() * 12345) % 10;
+            modulo++;
+
+            if (counter % modulo == 3) {
+                if (check_bis < check_ter) {
+                    mutation(specimen_bis, 1);
+                    counter++;
+                    counter_bis++;
+                    counter_ter = 0;
+                } else {
+                    mutation(specimen_ter, 2);
+                    counter++;
+                    counter_bis = 0;
+                    counter_ter++;
+                }
+
+               /* if (specimen_bis.adaptation() == 1000 || specimen_ter.adaptation() == 1000) {
+                    map.add_city(replaced);
+                    map.erase_city(added);
+                }*/
+                continue;
+            }
 
            /* if (counter_ter > 1 || counter_bis > 1)
                 map.add_city(eliminated);*/
 
-            if (specimen_ter.adaptation() == 1000 || specimen_bis.adaptation() == 1000)
-                map.add_city(eliminated);
+           /* if (specimen_ter.adaptation() == 1000 || specimen_bis.adaptation() == 1000)
+                map.add_city(eliminated);*/
 
-            if (check_bis<check_ter)
-            {
+            if (check_bis < check_ter) {
                 replace_specimen(specimen_bis, 1);
                 counter_bis++;
                 counter_ter = 0;
-            }
-            else
-            {
+            } else {
                 replace_specimen(specimen_ter, 2);
                 counter_bis = 0;
                 counter_ter++;
             }
+
+            counter++;
         }
 
-        if(counter_bis == 10)
+        if (counter_bis == 25)
             return specimen_bis;
         else
             return specimen_ter;
 
     }
 
-    public void replace_specimen(Specimen specimen, int id)
-    {
+    public void replace_specimen(Specimen specimen, int id) {
         int check = 0;
-        while (check == 0)
-        {
-            eliminated = (int) (Math.random() * 1234);
+        while (check == 0) {
+            eliminated = (int) (Math.random() * 12304);
             eliminated = eliminated % 74;
 
-            if (specimen.hospitals[eliminated]==1) {
+            if (specimen.hospitals[eliminated] == 1) {
                 check = 1;
             }
         }
         map.erase_city(eliminated);
 
-        if (id ==1)
+        if (id == 1) {
             specimen_ter = new Specimen(specimen.getGeneration(), map, specimen.getHospitals(), eliminated, specimen.getSize());
-        else if ( id ==2)
+            if(specimen_ter.adaptation() == 1000)
+            {
+                map.add_city(eliminated);
+            }
+        }
+        else if (id == 2) {
             specimen_bis = new Specimen(specimen.getGeneration(), map, specimen.getHospitals(), eliminated, specimen.getSize());
+            if(specimen_bis.adaptation() == 1000)
+            {
+                map.add_city(eliminated);
+            }
+        }
 
     }
 
+    public void mutation(Specimen specimen, int id) {
+        int check = 0;
+        replaced = 0;
+        replaced_bis = 0;
+        added = 0;
+
+        while (check == 0) {
+            replaced = (int) (Math.random() * 12345);
+            replaced = replaced % 74;
+
+            if (specimen.hospitals[replaced] == 1)
+                check = 1;
+        }
+        check = 0;
+
+        while (check == 0) {
+            added = (int) (Math.random() * 123456);
+            added = added % 74;
+
+            if (specimen.hospitals[added] == 0) //get hospitals powinno być
+                check = 1;
+        }
+
+        map.erase_city(replaced);
+        map.add_city(added);
+
+        if (id == 1) {
+            specimen_ter = new Specimen(specimen.getGeneration(), map, specimen.getHospitals(), replaced, specimen.getSize());
+            specimen_ter.setHospital(added, 1);
+
+            if(specimen_ter.adaptation() == 1000)
+            {
+                map.add_city(replaced);
+                map.erase_city(added);
+            }
+
+
+        } else if (id == 2) {
+            specimen_bis = new Specimen(specimen.getGeneration(), map, specimen.getHospitals(), replaced, specimen.getSize());
+            specimen_bis.setHospital(added, 1);
+
+            if(specimen_bis.adaptation() == 1000)
+            {
+                map.add_city(replaced);
+                map.erase_city(added);
+            }
+
+        }
+
+    }
 }

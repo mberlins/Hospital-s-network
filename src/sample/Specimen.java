@@ -108,5 +108,11 @@ public class Specimen
         return size;
     }
 
+    public void setHospital(int index, int value)
+    {
+        hospitals[index] = value;
+
+    }
+
 
 }
