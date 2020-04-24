@@ -1,63 +1,107 @@
 package sample;
 
+/**
+ * Klasa Map generuje oraz obsuługuje mapę Polski wraz z rozmieszczoymi na niej szpitalami
+ */
 public class Map
 {
-    //Country country;
+    /**
+     * Szerokość mapy
+     */
     final int x_extent = 689;
+
+    /**
+     * Wysokość mapy
+     */
     final int y_extent = 649;
+
+    /**
+     * Tablica field reprezentuje mapę Polski wraz z rozmieszczonymi szpitalami i ich zasięgami
+     */
     private int field[][] = new int[649][689];
+
+    /**
+     * Zasięg szpitala
+     */
     final int circle_radius = 187;
+
+    /**
+     * Aktualna ilość szpitali na mapie
+     */
     private int size;
+
+    /**
+     * Ilość punktów granicznych
+     */
     private int sizeBorders;
+
+    /**
+     * Zmienna pomocnicza, używana przy rysowaniu granic
+     */
     private int temp;
+
+    /**
+     * Tablica miast, w których znajdują się szpitale
+     */
     private City cities[];
+
+    /**
+     * Tablica punktów służących do wyznaczania uproszczonych granic
+     */
     private City borderPoints[];
+
+    /**
+     * Tablica punktów granicznych
+     */
     private City borders[];
 
-
+    /**
+     * @return szerokość mapy
+     */
     public int getX_extent()
     {
         return x_extent;
     }
 
+    /**
+     * @return wysokość mapy
+     */
     public int getY_extent()
     {
         return y_extent;
     }
 
+    /**
+     * @return referencję na tablicę field
+     */
     public int[][] getField()
     {
         return field;
     }
 
-    public void setField(int[][] field)
-    {
-        this.field = field;
-    }
-
+    /**
+     * @return zwraca ilość szpitali rozlokowanych ma mapie
+     */
     public int getSize()
     {
         return size;
     }
 
-    public void setSize(int size)
-    {
-        this.size = size;
-    }
-
+    /**
+     * @return referencję na tablicę cities
+     */
     public City[] getCities()
     {
         return cities;
     }
 
-    public void setCities(City[] cities)
-    {
-        this.cities = cities;
-    }
 
     /**
-     * Funkcja zapełnia tablicę field domyślnymi wartościami (szpitale w każdym mieście)
-     * @param cities
+     * Konstruktor obiektu klasy Map.Funkcja zapełnia tablicę field domyślnymi wartościami
+     * (granice, punkty graniczne oraz szpital w każdym mieście).
+     * @param cities przekazuje domyślną tablicę miast
+     * @param borderPoints przekazuje domyślną tablicę punktów służących do wyznaczania uproszczonych granic
+     * @param borders przekazuje domyślną tablicę punktów granicznych
      */
     public Map(City[] cities, City[] borderPoints, City[] borders) // Map(country.getCities())
     {
@@ -129,7 +173,7 @@ public class Map
 
     /**
      * Funkcja dekrementuje pola tablicy field będące w zasięgu usuwanego szpitala
-     * @param number oznacza nr usuwanego miasta, w którym usuwany jest szpital
+     * @param number oznacza nr miasta, w którym usuwany jest szpital
      */
     public void erase_city(int number)
     {
@@ -148,6 +192,10 @@ public class Map
 
     }
 
+    /**
+     * Funkcja inkrementuje pola tablicy field będącę w zasięgu określonego miasta
+     * @param number oznacza nr miasta, w którym jest zadany szpital
+     */
     public void add_city(int number)
     {
         for (int i = cities[number].getX_coor() - circle_radius; i <= circle_radius + cities[number].getX_coor(); i++)

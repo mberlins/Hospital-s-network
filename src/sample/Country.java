@@ -1,38 +1,56 @@
 package sample;
 
 /**
- * Obiekt klasy typu country przechowuje tworzy oraz przechpowuje domyślną listę miast, w których możę
- * znajdować się szpital
+ * Obiekt klasy typu country tworzy oraz przechowuje domyślną listę miast, w których może
+ * znajdować się szpital oraz domyślną listę granic i punktów granicznych
  */
 public class Country
 {
+    /**
+     * Tablica miast, w których można ulokować szpitale.
+     */
     private City cities[] = new City [74];
+
+    /**
+     * Tablica punktów granicznych, które muszą być w zasięgu szpitali.
+     */
     private City borders[] = new City [74];
+
+    /**
+     * Tablica punktów służących do wyznaczenia przybliżonych granic Państwa.
+     */
     private City borderPoints[] = new City [9];
 
-    public void setBorders(City[] borders) { this.borders = borders; }
-
-    public void setBorderPoints(City[] borderPoints) { this.borderPoints = borderPoints; }
-
+    /**
+     * @return tablicę punktów granicznych, które muszą być w zasięgu szpitali
+     */
     public City[] getBorders() { return borders; }
 
+    /**
+     * @return tablicę punktów służących do wyznaczenia przybliżonych granic Państwa.
+     */
     public City[] getBorderPoints() { return borderPoints; }
 
+    /**
+     * @return tablicę miast, w których można ulokować szpitale.
+     */
     public City[] getCities()
     {
         return cities;
     }
 
-    public void setCities(City[] cities)
-    {
-        this.cities = cities;
-    }
-
+    /**
+     * @param index przekazuje indeks szukanego miasta
+     * @return zwraca miasto o zadanym indeksie
+     */
     public City getCity (int index)
     {
         return cities[index];
     }
 
+    /**
+     * Konstruktor klasy Country wypełniający tablice cities[], borders[] oraz borderPoints[] domyślnymi wartościami
+     */
     public Country()
     {
         cities[0] = new City(1, "Warszawa", 476, 295 );
@@ -209,7 +227,5 @@ public class Country
         borderPoints[6] = new City(386, 556);
         borderPoints[7] = new City(201, 32);
         borderPoints[8] = new City(294, 77);
-
-
     }
 }
