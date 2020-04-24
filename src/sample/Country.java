@@ -6,9 +6,9 @@ package sample;
  */
 public class Country
 {
-    City cities[] = new City [74];
-    City borders[] = new City [74];
-    City borderPoints[] = new City [9];
+    private City cities[] = new City [74];
+    private City borders[] = new City [74];
+    private City borderPoints[] = new City [9];
 
     public void setBorders(City[] borders) { this.borders = borders; }
 
@@ -26,6 +26,11 @@ public class Country
     public void setCities(City[] cities)
     {
         this.cities = cities;
+    }
+
+    public City getCity (int index)
+    {
+        return cities[index];
     }
 
     public Country()
@@ -175,7 +180,7 @@ public class Country
         borders[54] = new City(44, 296);
         borders[55] = new City(32, 275);
         borders[56] = new City(33, 246);
-        borders[57] = new City(1, 224); // najdalej na W czemu 1 a nie 0?
+        borders[57] = new City(1, 224); // najdalej na W
         borders[58] = new City(20, 195);
         borders[59] = new City(21, 164);
 
@@ -188,7 +193,7 @@ public class Country
         borders[66] = new City(172, 31);
         borders[67] = new City(206, 16);
         borders[68] = new City(228, 8);
-        borders[69] = new City(291, 1); // najdalej na N czemu 1 a nie 0?
+        borders[69] = new City(291, 1); // najdalej na N
 
         borders[70] = new City(297, 2);
         borders[71] = new City(324, 21);

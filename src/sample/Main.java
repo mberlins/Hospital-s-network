@@ -33,7 +33,7 @@ public class Main extends Application {
 
         hospitals = specimen.getHospitals();
 
-        int field[][] = specimen.field;
+        int field[][] = specimen.getField();
 
         View view = new View(primaryStage);
         view.initialize();
@@ -41,7 +41,7 @@ public class Main extends Application {
         for(int i = 0; i < 74; i++)
         {
             if(hospitals[i] == 1)
-            view.addCircle(country.cities[i].x_coor, country.cities[i].y_coor, 187);
+                view.addCircle(country.getCity(i).getX_coor(), country.getCity(i).getY_coor(), 187);
         }
 
         for (int i = 0; i < 649; i++) {

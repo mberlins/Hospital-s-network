@@ -1,70 +1,129 @@
 package sample;
 
+/**
+ * Klasa Specimen przechowuje informacje o osobniku (czyli konkretnym układzie szpitali).
+ */
 public class Specimen
 {
-    int generation;
-    int size;
-    int hospitals[];
+    /**
+     * Generacja sobnika.
+     */
+    private int generation;
+
+    /**
+     * Ilość szpitali jaką posiada osobnik
+     */
+    private int size;
+
+    /**
+     * Tablica indeksów szpitali, które posiada osobnik
+     */
+    private int hospitals[];
+
+    /**
+     * Ilość kolumn w tablicy field
+     */
     final int x_extent = 689;
+
+    /**
+     * Ilość wierszy w tablicy field
+     */
     final int y_extent = 649;
-    int field[][] = new int[649][689];
 
+    /**
+     * Tablica przechowująca aktualne zasięgi szpitali danego osobnika
+     */
+    private int field[][] = new int[649][689];
 
+    /**
+     * @return generację osobnika
+     */
     public int getGeneration()
     {
         return generation;
     }
 
+    /**
+     * @param generation ustawia wartość pola generation
+     */
     public void setGeneration(int generation)
     {
         this.generation = generation;
     }
 
+    /**
+     * @return wartość pola size
+     */
     public int getSize()
     {
         return size;
     }
 
+    /**
+     * @param size ustawia wartość pola size
+     */
     public void setSize(int size)
     {
         this.size = size;
     }
 
+    /**
+     * @return tablicę indeksów szpitali danego osobnika
+     */
     public int[] getHospitals()
     {
         return hospitals;
     }
 
-    public void setHospitals(int[] hospitals)
+    /**
+     * @param hospital przekazuje indeks elementu, którego wartość należy zmienić w tablicy hospitals
+     * @param value przekazuje wartość do ustawienia dla danego elementu
+     */
+    public void setHospital (int hospital, int value)
     {
-        this.hospitals = hospitals;
+        this.hospitals[hospital] = value;
     }
 
+    /**
+     * @param index oznacza indeks elementu do zwrócenia
+     * @return element z tablicy hospitals
+     */
+    public int getHospital(int index)
+    {
+        return this.hospitals[index];
+    }
+
+    /**
+     * @return ilość kolumn tablicy field
+     */
     public int getX_extent()
     {
         return x_extent;
     }
 
+    /**
+     * @return ilość wierszy tablicy Field
+     */
     public int getY_extent()
     {
         return y_extent;
     }
 
+    /**
+     * @return referencję na tablicę field
+     */
     public int[][] getField()
     {
         return field;
     }
 
-    public void setField(int[][] field)
-    {
-        this.field = field;
-    }
-
     /**
-     * Konstruktor klasy Specimen
-     * @param generation oznacza generację osobnika
-     * @param map przechowuje informacje o pokryciu powierzchni kraju przez siatkę szpitali, powinien być przekazywany
-     *            przez osobnika poprzedniej generacji
+     * Konstruktor klasy specimen
+     * @param generation przekazuje generacje rodzica
+     * @param map przekazuje obiekt typu map, z którego pobrana zostanie tablica field
+     * @param predecessors_hospitals przekazuje tablicę z numerami szpitali rodzica
+     * @param number przekazuje id szpitala, który zostanie usunięty
+     * @param size przekazuje rozmiar rodzica
      */
     public Specimen(int generation, Map map, int[] predecessors_hospitals, int number, int size) // (poprzednik.getGeneration(), poprzednik.getCities(), poprzednik.getMap(), number dostaje od algorytmu)
     {
@@ -84,7 +143,12 @@ public class Specimen
 
     }
 
-    public Specimen(int generation, Map map) // konstruktor pierwszego osobnika
+    /**
+     * Konstruktor klasy Specimen, wykorzystywany tylko do utworzenia pierwszego osobnika
+     * @param generation przekazuje domyślną generację (0)
+     * @param map przekazuje obiekt map z domyślnymi wartościami
+     */
+    public Specimen(int generation, Map map)
     {
         this.generation = generation;
         this.size = map.getSize();
@@ -94,7 +158,11 @@ public class Specimen
             hospitals[i] = 1;
     }
 
-
+    /**
+     * Funkcja określająca jakość danego osobnika - jeśli mapa danego osobnika zawiera zera to oznacza, że pewien obszar
+     * kraju jest za bardzo oddalony od najbliższego szpitala.
+     * @return zwraca wartość size - im mniejszy osobnik tym lepszy
+     */
     public int adaptation()
     {
 
@@ -106,12 +174,6 @@ public class Specimen
             }
 
         return size;
-    }
-
-    public void setHospital(int index, int value)
-    {
-        hospitals[index] = value;
-
     }
 
 

@@ -3,10 +3,10 @@ package sample;
 
 public class City
 {
-    int id=0;
-    String name;
-    int x_coor;
-    int y_coor;
+    private int id=0;
+    private String name;
+    private int x_coor;
+    private int y_coor;
 
 
     public int getId()

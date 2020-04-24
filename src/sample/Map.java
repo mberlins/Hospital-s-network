@@ -5,14 +5,14 @@ public class Map
     //Country country;
     final int x_extent = 689;
     final int y_extent = 649;
-    int field[][] = new int[649][689];
+    private int field[][] = new int[649][689];
     final int circle_radius = 187;
-    int size;
-    int sizeBorders;
-    int temp;
-    City cities[];
-    City borderPoints[];
-    City borders[];
+    private int size;
+    private int sizeBorders;
+    private int temp;
+    private City cities[];
+    private City borderPoints[];
+    private City borders[];
 
 
     public int getX_extent()
@@ -67,7 +67,7 @@ public class Map
         this.borderPoints = borderPoints;
         this.borders = borders;
 
-        temp = borderPoints[6].y_coor;
+        temp = borderPoints[6].getY_coor();
 
 
         for (int i = 0; i < x_extent; i++)
@@ -75,47 +75,47 @@ public class Map
                 field[j][i] = -1;
 
         /* 6 pętli - rysują uproszczoną mapę Polski w tabeli fields */
-        for (int i = borderPoints[0].x_coor; i <= borderPoints[2].x_coor; i++)
-            for (int j=borderPoints[0].y_coor; j<= borderPoints[1].y_coor; j++)
+        for (int i = borderPoints[0].getX_coor(); i <= borderPoints[2].getX_coor(); i++)
+            for (int j=borderPoints[0].getY_coor(); j<= borderPoints[1].getY_coor(); j++)
                 field[j][i] = 0;
 
-        for (int i = borderPoints[4].x_coor; i <= borderPoints[2].x_coor; i++)
-            for (int j=borderPoints[4].y_coor; j<= borderPoints[5].y_coor; j++)
+        for (int i = borderPoints[4].getX_coor(); i <= borderPoints[2].getX_coor(); i++)
+            for (int j=borderPoints[4].getY_coor(); j<= borderPoints[5].getY_coor(); j++)
                 field[j][i] = 0;
 
-        for (int i = borderPoints[6].x_coor; i <= borderPoints[2].x_coor; i++)
-            for (int j=borderPoints[5].y_coor; j<= borderPoints[6].y_coor; j++)
+        for (int i = borderPoints[6].getX_coor(); i <= borderPoints[2].getX_coor(); i++)
+            for (int j=borderPoints[5].getY_coor(); j<= borderPoints[6].getY_coor(); j++)
                 field[j][i] = 0;
 
-        for (int i = borderPoints[6].x_coor; i >= borderPoints[4].x_coor; i--)
+        for (int i = borderPoints[6].getX_coor(); i >= borderPoints[4].getX_coor(); i--)
         {
-            for (int j = borderPoints[5].y_coor; j <= temp; j++)
+            for (int j = borderPoints[5].getY_coor(); j <= temp; j++)
                 field[j][i] = 0;
             if(i % 2 == 0)
                 temp--;
         }
 
-        for (int i = borderPoints[7].x_coor; i <= borderPoints[8].x_coor; i++)
-            for (int j = borderPoints[7].y_coor; j<= borderPoints[0].y_coor; j++)
+        for (int i = borderPoints[7].getX_coor(); i <= borderPoints[8].getX_coor(); i++)
+            for (int j = borderPoints[7].getY_coor(); j<= borderPoints[0].getY_coor(); j++)
                 field[j][i] = 0;
 
-        for (int i = borderPoints[8].x_coor; i <= borderPoints[2].x_coor; i++)
-            for (int j = borderPoints[8].x_coor; j <= borderPoints[0].y_coor; j++)
+        for (int i = borderPoints[8].getX_coor(); i <= borderPoints[2].getX_coor(); i++)
+            for (int j = borderPoints[8].getX_coor(); j <= borderPoints[0].getY_coor(); j++)
                 field[j][i] = 0;
 
         /* wypełnia tabelę fields punktami oznaczającymi dokładne granice Polski */
         for (int i = 0; i < sizeBorders; i++)
-            field[borders[i].y_coor][borders[i].x_coor] = 0;
+            field[borders[i].getY_coor()][borders[i].getX_coor()] = 0;
 
 
         /* inkrementuje kółka */
         for(int i=0; i<size; i++)
         {
-            for (int j = cities[i].x_coor - circle_radius; j <= circle_radius + cities[i].x_coor; j++)
+            for (int j = cities[i].getX_coor() - circle_radius; j <= circle_radius + cities[i].getX_coor(); j++)
             {
-                for (int k = cities[i].y_coor - circle_radius; k<= circle_radius + cities[i].y_coor; k++)
+                for (int k = cities[i].getY_coor() - circle_radius; k<= circle_radius + cities[i].getY_coor(); k++)
                 {
-                    double distance_to_centre = Math.sqrt((j - cities[i].x_coor) * (j - cities[i].x_coor) + (k - cities[i].y_coor) * (k - cities[i].y_coor));
+                    double distance_to_centre = Math.sqrt((j - cities[i].getX_coor()) * (j - cities[i].getX_coor()) + (k - cities[i].getY_coor()) * (k - cities[i].getY_coor()));
                     if (distance_to_centre < circle_radius + 0.5)
                     {
                         if (k<649 && k>0 && j<689 && j>0 && field[k][j] != -1)
@@ -133,11 +133,11 @@ public class Map
      */
     public void erase_city(int number)
     {
-        for (int i = cities[number].x_coor - circle_radius; i <= circle_radius + cities[number].x_coor; i++)
+        for (int i = cities[number].getX_coor() - circle_radius; i <= circle_radius + cities[number].getX_coor(); i++)
         {
-            for (int j = cities[number].y_coor - circle_radius; j<= circle_radius + cities[number].y_coor; j++)
+            for (int j = cities[number].getY_coor() - circle_radius; j<= circle_radius + cities[number].getY_coor(); j++)
             {
-                double distance_to_centre = Math.sqrt((i - cities[number].x_coor) * (i - cities[number].x_coor) + (j - cities[number].y_coor) * (j - cities[number].y_coor));
+                double distance_to_centre = Math.sqrt((i - cities[number].getX_coor()) * (i - cities[number].getX_coor()) + (j - cities[number].getY_coor()) * (j - cities[number].getY_coor()));
                 if (distance_to_centre < circle_radius + 0.5)
                 {
                     if (j<649 && j>0 && i<689 && i>0 && field[j][i] != -1)
@@ -150,11 +150,11 @@ public class Map
 
     public void add_city(int number)
     {
-        for (int i = cities[number].x_coor - circle_radius; i <= circle_radius + cities[number].x_coor; i++)
+        for (int i = cities[number].getX_coor() - circle_radius; i <= circle_radius + cities[number].getX_coor(); i++)
         {
-            for (int j = cities[number].y_coor - circle_radius; j<= circle_radius + cities[number].y_coor; j++)
+            for (int j = cities[number].getY_coor() - circle_radius; j<= circle_radius + cities[number].getY_coor(); j++)
             {
-                double distance_to_centre = Math.sqrt((i - cities[number].x_coor) * (i - cities[number].x_coor) + (j - cities[number].y_coor) * (j - cities[number].y_coor));
+                double distance_to_centre = Math.sqrt((i - cities[number].getX_coor()) * (i - cities[number].getX_coor()) + (j - cities[number].getY_coor()) * (j - cities[number].getY_coor()));
                 if (distance_to_centre < circle_radius + 0.5)
                 {
                     if (j<649 && j>0 && i<689 && i>0 && field[j][i] != -1)
