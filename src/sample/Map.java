@@ -63,7 +63,7 @@ public class Map
     {
         this.size = cities.length;
         this.cities = cities;
-        this.sizeBorders = borderPoints.length;
+        this.sizeBorders = borders.length;
         this.borderPoints = borderPoints;
         this.borders = borders;
 

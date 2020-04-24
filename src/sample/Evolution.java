@@ -77,7 +77,10 @@ public class Evolution
             check_ter = specimen_ter.adaptation();
             check_bis = specimen_bis.adaptation();
 
-            if (counter_ter > 1 || counter_bis > 1)
+           /* if (counter_ter > 1 || counter_bis > 1)
+                map.add_city(eliminated);*/
+
+            if (specimen_ter.adaptation() == 1000 || specimen_bis.adaptation() == 1000)
                 map.add_city(eliminated);
 
             if (check_bis<check_ter)
