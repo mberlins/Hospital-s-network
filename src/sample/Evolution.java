@@ -17,9 +17,14 @@ public class Evolution
     private int counter_ter = 0;
 
     private int replaced;
-    private int replaced_bis;
     private int added;
-    private int temp;
+
+    public int getCounter()
+    {
+        return counter;
+    }
+
+    private int counter = 20;
 
 
     public Country getCountry()
@@ -62,7 +67,6 @@ public class Evolution
 
     public Specimen evolution_control()
     {
-        int counter = 20;
         int check_ter = 1000;
         int check_bis = 1000;
         eliminated = (int) (Math.random() * 1234);
@@ -78,7 +82,7 @@ public class Evolution
         else
             replace_specimen(specimen_ter, 2);
 
-        while (counter_bis < 25 && counter_ter < 25)
+        while (counter_bis < 500 && counter_ter < 500)
         {
             check_ter = specimen_ter.adaptation();
             check_bis = specimen_bis.adaptation();
@@ -121,7 +125,7 @@ public class Evolution
             counter++;
         }
 
-        if (counter_bis == 25)
+        if (counter_bis == 500)
             return specimen_bis;
         else
             return specimen_ter;
@@ -166,7 +170,6 @@ public class Evolution
     {
         int check = 0;
         replaced = 0;
-        replaced_bis = 0;
         added = 0;
 
         while (check == 0)
